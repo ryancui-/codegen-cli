@@ -1,6 +1,6 @@
 #! /usr/bin/env node --harmony
 
-const program = require('commander');
+import program from 'commander';
 import getDatabaseMetaData from './db/mysql';
 
 program
@@ -10,19 +10,26 @@ program
   .option('-u, --user <user>', 'Database user')
   .option('-p, --password <password>', 'Database password')
   .option('-t, --table <database.table>', 'Database table')
+  .option('--camel-case', 'use camel case column name')
   .parse(process.argv);
 
 const templateName = program.args[0];
-const dbConfig = {
-  host: program.host,
-  user: program.user,
-  password: program.password,
-  database: program.table.split('.')[0]
-};
-const table = program.table.split('.')[1];
+if (!(program.host && program.user && program.password && program.table)) {
+  console.log('Missing parameters');
+} else {
+  const dbConfig = {
+    host: program.host,
+    user: program.user,
+    password: program.password,
+    database: program.table.split('.')[0]
+  };
+  const table = program.table.split('.')[1];
 
-getDatabaseMetaData(dbConfig, table).then(res => {
-  console.log(res);
-});
+  getDatabaseMetaData(dbConfig, table).then(res => {
+    console.log(res);
+  });
+}
+
+
 
 
