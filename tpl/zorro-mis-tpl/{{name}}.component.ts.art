@@ -1,7 +1,0 @@
-<div>
-{{each $data['columns']}}
-  <span>{{$value['column']}}</span>
-  <span>{{$value['comment']}}</span>
-  <span>{{$value['type']}}</span>
-{{/each}}
-</div>

@@ -9,8 +9,15 @@ export class ArtTemplateEngine implements BaseEngine {
     this.renderData = renderData;
   }
 
-  render(templateDir: string): string {
-    return template(templateDir, this.renderData);
+  render(templateDir: string): Array<string> {
+    if (!templateDir.endsWith('.art')) {
+      return [];
+    }
+
+    const targetName = templateDir.substring(templateDir.lastIndexOf('/'))
+      .replace('.art', '').replace(/{{name}}/, this.renderData.component);
+
+    return [targetName, template(templateDir, this.renderData)];
   }
 
   getRenderData(): RenderData {

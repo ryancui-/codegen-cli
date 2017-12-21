@@ -40,39 +40,21 @@ export class Codegen {
         }
         this.renderFilesUnderDir(fullname, targetRealDir);
       } else {
-        const targetFile = path.join(targetDir,
-          filename.replace('.art', '').replace(/{{name}}/, this.engine.getRenderData().component));
-        let action = 'Create';
+        const [targetName, targetContent] = this.engine.render(fullname);
+        if (targetName) {
+          const targetFile = path.join(targetDir, targetName);
+          let action = 'Create';
+          if (fs.existsSync(targetFile)) {
+            action = 'Replace';
+            fs.unlinkSync(targetFile);
+          }
 
-        if (fs.existsSync(targetFile)) {
-          action = 'Replace';
-          fs.unlinkSync(targetFile);
+          fs.writeFileSync(targetFile, targetContent);
+          console.log(action === 'Create' ?
+            chalk.green(action + ' ' + targetFile) :
+            chalk.yellow(action + ' ' + targetFile));
         }
-
-        fs.writeFileSync(targetFile, this.engine.render(fullname));
-        console.log(action === 'Create' ?
-          chalk.green(action + ' ' + targetFile) :
-          chalk.yellow(action + ' ' + targetFile));
       }
     });
-  }
-
-  /**
-   * Delete directory
-   * @param path
-   */
-  private deleteAll(path: string) {
-    if (fs.existsSync(path)) {
-      const files = fs.readdirSync(path);
-      files.forEach((file) => {
-        const curPath = path + '/' + file;
-        if (fs.statSync(curPath).isDirectory()) {
-          this.deleteAll(curPath);
-        } else {
-          fs.unlinkSync(curPath);
-        }
-      });
-      fs.rmdirSync(path);
-    }
   }
 }
