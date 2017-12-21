@@ -1,9 +1,11 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', {value: true});
-const fs = require('fs');
-const path = require('path');
-class Codegen {
-  constructor(engine) {
+import * as fs from 'fs';
+import * as path from 'path';
+import {BaseEngine} from './render/base-engine';
+
+export class Codegen {
+  engine;
+
+  constructor(engine: BaseEngine) {
     this.engine = engine;
   }
 
@@ -26,14 +28,14 @@ class Codegen {
     files.forEach(filename => {
       var fullname = path.join(srcDir, filename);
       var stats = fs.statSync(fullname);
+
       if (stats.isDirectory()) {
         const targetRealDir = path.join(targetDir, filename);
         if (!fs.existsSync(targetRealDir)) {
           fs.mkdirSync(targetRealDir);
         }
         this.renderFilesUnderDir(fullname, targetRealDir);
-      }
-      else {
+      } else {
         const targetFile = path.join(targetDir, filename.replace('.art', ''));
         if (fs.existsSync(targetFile)) {
           fs.unlinkSync(targetFile);
@@ -47,15 +49,14 @@ class Codegen {
    * Delete directory
    * @param path
    */
-  deleteAll(path) {
+  private deleteAll(path: string) {
     if (fs.existsSync(path)) {
       const files = fs.readdirSync(path);
       files.forEach((file) => {
         const curPath = path + '/' + file;
         if (fs.statSync(curPath).isDirectory()) {
           this.deleteAll(curPath);
-        }
-        else {
+        } else {
           fs.unlinkSync(curPath);
         }
       });
@@ -63,4 +64,3 @@ class Codegen {
     }
   }
 }
-exports.Codegen = Codegen;

@@ -1,12 +1,14 @@
 # codegen-cli
 
-A CLI code generator for frontend developers to generate repeatly codes from database.
+A CLI code generator specially for frontend developers to generate repeatly codes from database.
 
-## Overview
+## Why this
 
 Long time ago, we had a Java code generator that can read database table information and generate `.java` files (like JavaBean, Controller, Service, etc) and `.js`/`.html` files (using jQuery and EasyUI) for a basic CURD page.
 
-Nowadays, we don't use jQuery or EasyUI any longer. But we still working on some MIS systems which
+Nowadays, we don't use jQuery or EasyUI any longer. But we still working on some MIS systems which also needs many many CURD pages. Though we are using Angular and NG-ZORRO-ANTD, code generator is still useful.
+
+Instead of configuring Java environments(jdk, gradle, maven, etc...), I prefer using some cli-tool like `vue-cli`, `angular-cli` that frontend developers are familiar with.
 
 ## Install
 
@@ -55,17 +57,19 @@ codegen-cli use `art-template` to render files. In order to let you write your o
 An array of the database table columns information would be sent to template. In `art-template`, you can use `$data` to retrieve them.
 
 ```json
-[{
-  "column": "product_price",
-  "comment": "The product price",
-  "type": "number",
-  "allowNull": false
-}, {
-  "column": "description",
-  "comment": "Description",
-  "type": "string",
-  "allowNull": true
-}, ...]
+{
+  "columns": [{
+    "column": "product_price",
+    "comment": "The product price",
+    "type": "number",
+    "allowNull": false
+  }, {
+    "column": "description",
+    "comment": "Description",
+    "type": "string",
+    "allowNull": true
+  }, ...]
+}
 ```
 
 > `type` is not the database(MySQL) data types, but JavaScript types, which includes `number`/`string`/`date` 
@@ -78,4 +82,6 @@ A lot of features are still under developing...
 - [ ] Support other template engine(like ejs...)
 - [ ] Camel-case tranforming
 - [ ] Allow database table prefix
+- [ ] Allow variables in filename
+- [ ] Generation process info in terminal
 

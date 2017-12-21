@@ -4,8 +4,8 @@
   "description": "A code generator cli tool for front end developers, without configuring Java environments.",
   "main": "src/index.js",
   "scripts": {
-    "build": "babel src -d lib",
-    "dev": "babel src -d lib && npm link",
+    "build": "tsc",
+    "dev": "tsc && npm link",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
@@ -32,7 +32,7 @@
     "mysql": "^2.15.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "@types/node": "^8.5.1",
+    "typescript": "^2.6.2"
   }
 }

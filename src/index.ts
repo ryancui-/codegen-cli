@@ -1,8 +1,10 @@
-#! /usr/bin/env node --harmony
-
-import program from 'commander';
-import getDatabaseMetaData from './db/mysql';
-import renderDirectory from './file-op';
+#! /usr/bin/env node
+// import program = require('commander');
+import * as program from 'commander';
+import {MySQLProvider} from './db/mysql';
+import {Codegen} from './file-op';
+import {ArtTemplateEngine} from './render/art';
+import {RenderData} from './model/table-info.model';
 
 program
   .version('1.0.0')
@@ -25,11 +27,11 @@ if (!(program.host && program.user && program.password && program.table)) {
   };
   const table = program.table.split('.')[1];
 
-  getDatabaseMetaData(dbConfig, table).then(res => {
-    renderDirectory(__dirname + `/../tpl/${templateName}/`);
+  const mysqlProvider = new MySQLProvider(dbConfig, table);
+  mysqlProvider.getRenderData().then((res: RenderData) => {
+    const artEngine = new ArtTemplateEngine(res);
+    const codeGen = new Codegen(artEngine);
+
+    codeGen.start(__dirname + `/../tpl/${templateName}/`, process.cwd());
   });
 }
-
-
-
-

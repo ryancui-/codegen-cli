@@ -1,5 +1,5 @@
 <div>
-{{each $data}}
+{{each $data['columns']}}
   <span>{{$value['column']}}</span>
   <span>{{$value['comment']}}</span>
   <span>{{$value['type']}}</span>
