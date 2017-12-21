@@ -27,6 +27,7 @@
   "homepage": "https://github.com/ryancui-/codegen-cli#readme",
   "dependencies": {
     "art-template": "^4.12.2",
+    "chalk": "^2.3.0",
     "commander": "^2.12.2",
     "download-git-repo": "^1.0.1",
     "inquirer": "^4.0.1",

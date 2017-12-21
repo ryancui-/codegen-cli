@@ -12,4 +12,8 @@ export class ArtTemplateEngine implements BaseEngine {
   render(templateDir: string): string {
     return template(templateDir, this.renderData);
   }
+
+  getRenderData(): RenderData {
+    return this.renderData;
+  }
 }

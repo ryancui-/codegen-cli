@@ -1,3 +1,4 @@
+import {RenderData} from '../model/table-info.model';
 export interface BaseEngine {
   /**
    * Render the template
@@ -5,4 +6,9 @@ export interface BaseEngine {
    * @return rendered string
    */
   render(templateDir: string): string;
+
+  /**
+   * Return the render data this engine use
+   */
+  getRenderData(): RenderData;
 }

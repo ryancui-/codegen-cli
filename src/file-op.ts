@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import chalk from 'chalk';
 import {BaseEngine} from './render/base-engine';
 
 export class Codegen {
@@ -15,7 +16,9 @@ export class Codegen {
    * @param distDir
    */
   start(srcDir, distDir) {
+    console.log('\nGenerating files ...\n');
     this.renderFilesUnderDir(srcDir, distDir);
+    console.log(chalk.green('\nSuccess'));
   }
 
   /**
@@ -33,14 +36,23 @@ export class Codegen {
         const targetRealDir = path.join(targetDir, filename);
         if (!fs.existsSync(targetRealDir)) {
           fs.mkdirSync(targetRealDir);
+          console.log(chalk.green('Create ' + targetRealDir));
         }
         this.renderFilesUnderDir(fullname, targetRealDir);
       } else {
-        const targetFile = path.join(targetDir, filename.replace('.art', ''));
+        const targetFile = path.join(targetDir,
+          filename.replace('.art', '').replace(/{{name}}/, this.engine.getRenderData().component));
+        let action = 'Create';
+
         if (fs.existsSync(targetFile)) {
+          action = 'Replace';
           fs.unlinkSync(targetFile);
         }
+
         fs.writeFileSync(targetFile, this.engine.render(fullname));
+        console.log(action === 'Create' ?
+          chalk.green(action + ' ' + targetFile) :
+          chalk.yellow(action + ' ' + targetFile));
       }
     });
   }
