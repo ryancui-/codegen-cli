@@ -29,6 +29,7 @@
     "art-template": "^4.12.2",
     "commander": "^2.12.2",
     "download-git-repo": "^1.0.1",
+    "inquirer": "^4.0.1",
     "mysql": "^2.15.0"
   },
   "devDependencies": {
