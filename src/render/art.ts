@@ -1,5 +1,6 @@
 import {BaseEngine} from './base-engine';
 import {RenderData} from '../model/table-info.model';
+import * as path from 'path';
 import * as template from 'art-template';
 
 template.defaults.imports.toCamelCase = function (value) {
@@ -36,7 +37,7 @@ export class ArtTemplateEngine implements BaseEngine {
       return [];
     }
 
-    const targetName = templateDir.substring(templateDir.lastIndexOf('/'))
+    const targetName = templateDir.substring(templateDir.lastIndexOf(path.sep))
       .replace('.art', '').replace(/{{name}}/, this.renderData.component);
 
     return [targetName, template(templateDir, this.renderData)];

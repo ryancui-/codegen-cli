@@ -1,6 +1,6 @@
 {
   "name": "codegen-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A code generator cli tool for front end developers, without configuring Java environments.",
   "main": "src/index.js",
   "scripts": {
