@@ -19,33 +19,59 @@ npm i -g codegen-cli
 ## Usage
 
 ```bash
-cg <templates-name> -h localhost -u root -p root -t db.table
+cg <templates-repo> --host localhost --user root --password root --schema db --table table
 ```
 
-#### template-name
+#### template-repo
 
-The template directory name, currently only supports `zorro-mis-tpl`
+The template repository name in Github, given by `user/repo` format
 
-#### -h, --host
+#### --host
 
 Database host address
 
-#### -u, --user
+#### --user
 
 Database login user
 
-#### -p, --password
+#### --password
 
 Database login password
 
-#### -t, --table
+#### --schema
 
-Database schema name and table name, given in `db.table` format
+Database schema
+
+#### --table
+
+Database table name
+
+#### --db
+
+Tell the cli the templates needs database information, and there is a interact interface for you to input database config needed
+
+#### --component-name
+
+The component name, currently only supports bar-seperated format, like `a-b-ccc`
 
 Example:
 
+Give everything in command
+
 ```bash
-cg zorro-mis-tpl -h localhost -u root -p qwerty -t mydb.t_user
+cg ryancui-/zorro-mis-tpl --host localhost --user root --password qwerty --schema mydb --table t_user --component-name user-page
+```
+
+Use interact input
+
+```bash
+$ cg ryancui-/zorro-mis-tpl --db
+? Input database <host>: 
+? Input database <user>: 
+? Input database <password>: 
+? Input database <schema>: 
+? Input database <table>: 
+? Input component name: 
 ```
 
 ## Write your own template
@@ -58,6 +84,7 @@ An array of the database table columns information would be sent to template. In
 
 ```json
 {
+  "component": "order-detail",
   "columns": [{
     "column": "product_price",
     "comment": "The product price",
@@ -68,7 +95,7 @@ An array of the database table columns information would be sent to template. In
     "comment": "Description",
     "type": "string",
     "allowNull": true
-  }, ...]
+  }]
 }
 ```
 
@@ -78,10 +105,10 @@ An array of the database table columns information would be sent to template. In
 
 A lot of features are still under developing...
 
-- [ ] Seperate template from cli tool into a different repo
+- [x] Seperate template from cli tool into a different repo
 - [ ] Support other template engine(like ejs...)
-- [ ] Camel-case tranforming
+- [x] Camel-case tranforming
 - [ ] Allow database table prefix
-- [ ] Allow variables in filename
-- [ ] Generation process info in terminal
+- [x] Allow variables in filename
+- [x] Generation process info in terminal
 

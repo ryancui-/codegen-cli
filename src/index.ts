@@ -25,6 +25,7 @@ try {
           codeGen.start(templateDir, process.cwd());
           templateDownload.remove();
         }, err => {
+          templateDownload.remove();
           console.log(chalk.red('\nError getting data from database, please make sure the config is correct'));
         });
       } else {
