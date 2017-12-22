@@ -1,7 +1,8 @@
 # codegen-cli
 
-[![npm version](https://badge.fury.io/js/codegen-cli.svg)](https://badge.fury.io/js/codegen-cli)
-[![Travis](https://img.shields.io/travis/ryancui-/codegen-cli.svg)]()
+[![npm](https://img.shields.io/npm/v/codegen-cli.svg?style=flat-square)](https://npmjs.com/package/codegen-cli)
+[![npm](https://img.shields.io/npm/dm/codegen-cli.svg?style=flat-square)](https://npmjs.com/package/codegen-cli)
+[![Travis](https://img.shields.io/travis/ryancui-/codegen-cli.svg?style=flat-square)]()
 
 A CLI code generator specially for frontend developers to generate repeatly codes from database.
 
