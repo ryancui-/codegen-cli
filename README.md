@@ -1,5 +1,8 @@
 # codegen-cli
 
+[![npm version](https://badge.fury.io/js/codegen-cli.svg)](https://badge.fury.io/js/codegen-cli)
+[![Travis](https://img.shields.io/travis/ryancui-/codegen-cli.svg)]()
+
 A CLI code generator specially for frontend developers to generate repeatly codes from database.
 
 ## Why this
