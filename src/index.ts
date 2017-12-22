@@ -43,7 +43,7 @@ try {
     });
   });
 } catch (err) {
-  console.log(chalk.gray('Unexpected error happened, plz contact me and the reproduce procedures'));
+  console.log(chalk.gray('\nUnexpected error happened, plz contact me and the reproduce procedures'));
 }
 
 

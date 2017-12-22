@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc && npm link",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "bin": {
     "cg": "./lib/index.js"
@@ -34,7 +34,24 @@
     "mysql": "^2.15.0"
   },
   "devDependencies": {
+    "@types/jest": "^21.1.9",
     "@types/node": "^8.5.1",
+    "jest": "^22.0.3",
+    "ts-jest": "^22.0.0",
     "typescript": "^2.6.2"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

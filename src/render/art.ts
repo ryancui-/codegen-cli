@@ -2,28 +2,10 @@ import {BaseEngine} from './base-engine';
 import {RenderData} from '../model/table-info.model';
 import * as path from 'path';
 import * as template from 'art-template';
+import {Utils} from '../utils';
 
-template.defaults.imports.toCamelCase = function (value) {
-  return value.split('-').map((word, i) =>
-    i === 0 ?
-      word :
-      ([...word].map((char, j) =>
-        j === 0 ?
-          char.toUpperCase() :
-          char)
-        .join(''))
-  ).join('');
-};
-
-template.defaults.imports.toPreUpper = function (value) {
-  return value.split('-').map((word, i) =>
-    [...word].map((char, j) =>
-      j === 0 ?
-        char.toUpperCase() :
-        char)
-      .join('')
-  ).join('');
-};
+template.defaults.imports.toCamelCase = Utils.toCamelCase;
+template.defaults.imports.toPreUpper = Utils.toPreUpper;
 
 export class ArtTemplateEngine implements BaseEngine {
   renderData;
